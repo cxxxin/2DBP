@@ -5,5 +5,6 @@
    - filepath 输入的图像所在的目录，如"D:\test\"
 
    - savepath 输出图像所在的目录
+   - S 迭代次数
 
 2. 运行rdh_2DBP.m
