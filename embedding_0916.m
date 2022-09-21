@@ -1,4 +1,4 @@
-%¶şÎ¬Ö±·½Í¼Á½¸ö·½ÏòÉÏ·Ö±ğ¿ØÖÆÍ¼ÏñÁÁ¶È£¬Ã¿ÂÖÑ¡ÔñĞĞ»òÁĞÖĞÊıÁ¿¶àµÄÀ´×ö
+%äºŒç»´ç›´æ–¹å›¾ä¸¤ä¸ªæ–¹å‘ä¸Šåˆ†åˆ«æ§åˆ¶å›¾åƒäº®åº¦ï¼Œæ¯è½®é€‰æ‹©è¡Œæˆ–åˆ—ä¸­æ•°é‡å¤šçš„æ¥åš
 
 function [rdh_image, payload_embedding, payload_total, iteration]=embedding_0916(image, payload, iteration_max)
 
@@ -9,10 +9,10 @@ image_size=size(image);
 
 Ps_list=zeros(2,iteration_max);
 Pc_list=zeros(2,iteration_max);
-i_j_list = zeros(1,iteration_max); % i,j¶¼±íÊ¾µÄÊÇÏñËØÖµ£¬i±íÊ¾Ä³Ò»¸öÏñËØ¶ÔÖĞ×ó±ßµÄÏñËØÖµ£¬j±íÊ¾ÓÒ±ßµÄ
+i_j_list = zeros(1,iteration_max); % i,jéƒ½è¡¨ç¤ºçš„æ˜¯åƒç´ å€¼ï¼Œiè¡¨ç¤ºæŸä¸€ä¸ªåƒç´ å¯¹ä¸­å·¦è¾¹çš„åƒç´ å€¼ï¼Œjè¡¨ç¤ºå³è¾¹çš„
 
-image_ref = zeros(image_size(1)*image_size(2),iteration_max); % Ã¿´Îµü´úÖĞ¶¼»áÓĞÒ»¸öreference image
-image_ref(:,1) = reshape(image,image_size(1)*image_size(2),1); % ³õÊ¼»¯£¬½«image¸³Öµ¸ø¾ØÕó
+image_ref = zeros(image_size(1)*image_size(2),iteration_max); % æ¯æ¬¡è¿­ä»£ä¸­éƒ½ä¼šæœ‰ä¸€ä¸ªreference image
+image_ref(:,1) = reshape(image,image_size(1)*image_size(2),1); % åˆå§‹åŒ–ï¼Œå°†imageèµ‹å€¼ç»™çŸ©é˜µ
 
 image_vec=image_ref(:,1);
 % original_brightness = mean(image_ref(:,1));
@@ -23,9 +23,9 @@ original_brightness1 = 0;
 original_brightness2 = 0;
 for i = 1 : image_size(1)
     for j = 1 : image_size(2)
-        if mod(j, 2) == 1 % pariÖĞµÄ×óÎ»
+        if mod(j, 2) == 1 % pariä¸­çš„å·¦ä½
             original_brightness1 = original_brightness1 + image(i, j);
-        else % pairÖĞµÄÓÒÎ»
+        else % pairä¸­çš„å³ä½
             original_brightness2 = original_brightness2 + image(i, j);
         end
     end
@@ -47,7 +47,7 @@ temp_p = 1;
 while true
     image_mat = reshape(image_vec, image_size(1), image_size(2));
     
-    HistMatrix = zeros(256, 256); % Éú³É¶şÎ¬Ö±·½Í¼
+    HistMatrix = zeros(256, 256); % ç”ŸæˆäºŒç»´ç›´æ–¹å›¾
     for i = 1 : image_size(1)
         for j = 1 : 2 : image_size(2)
             HistMatrix(image_mat(i,j)+1 , image_mat(i,j+1)+1) = HistMatrix(image_mat(i,j)+1 , image_mat(i,j+1)+1) + 1;
@@ -76,7 +76,7 @@ while true
     
     %Record location map
     LM = [];
-    if LM_size ~= 0
+    % if LM_size ~= 0
         if i_j == 0
             for i = 1 : image_size(1)
                 for j = 1 : 2 : image_size(2)
@@ -102,7 +102,7 @@ while true
                 end
             end
         end
-    end
+    % end
     
     sum = 0;
     if i_j == 0
@@ -121,12 +121,12 @@ while true
         
     if H_Ps - sum < length(LM)+34 || iteration == iteration_max %Stop condition reached
         % update peak
-        Ps_i = Ps_i_previous; % ²»¹»ĞÂµÄÒ»ÂÖÇ¶ÈëÁË£¬¾Í²»×öÁË£¬»Ö¸´³ÉÉÏÒ»´ÎµÄÏµÊı£¬Ö±½Ó½áÊø£¡
+        Ps_i = Ps_i_previous; % ä¸å¤Ÿæ–°çš„ä¸€è½®åµŒå…¥äº†ï¼Œå°±ä¸åšäº†ï¼Œæ¢å¤æˆä¸Šä¸€æ¬¡çš„ç³»æ•°ï¼Œç›´æ¥ç»“æŸï¼
         Ps_j = Ps_j_previous;
         Pc_i = Pc_i_previous;
         Pc_j = Pc_j_previous;
         i_j = i_j_previous;
-        Ps_i_previous = Ps_list(1, iteration); % ÉÏÒ»ÂÖµÄ²ÎÊı£¬Òª±»Ç¶Èë
+        Ps_i_previous = Ps_list(1, iteration); % ä¸Šä¸€è½®çš„å‚æ•°ï¼Œè¦è¢«åµŒå…¥
         Ps_j_previous = Ps_list(2, iteration);
         Pc_i_previous = Pc_list(1, iteration);
         Pc_j_previous = Pc_list(2, iteration);
@@ -135,7 +135,7 @@ while true
         
         image_mat = reshape(image_ref(:,iteration),image_size(1), image_size(2));
         
-        for j = 1 : 17 % Ëæ»ú¸²¸Ç17¸öÏñËØÖµ
+        for j = 1 : 17 % éšæœºè¦†ç›–17ä¸ªåƒç´ å€¼
             first_17_pixels(j, 1) = image_mat(1, j);
         end  
         original_17_lsb = mod(first_17_pixels,2);      
@@ -282,13 +282,13 @@ end
 
 function [ Ps_i, Ps_j, Pc_i, Pc_j, H_Ps, LM_size, i_j ] = adaptive_peak_selection(original_brightness1, original_brightness2, image_mat, HistMatrix)
 image_size = size(image_mat);
-current_brightness1 = 0; % pixel pairÖĞ×ó±ßµÄÏñËØÖµ
-current_brightness2 = 0; % pixel pairÖĞÓÒ±ßµÄÏñËØÖµ
+current_brightness1 = 0; % pixel pairä¸­å·¦è¾¹çš„åƒç´ å€¼
+current_brightness2 = 0; % pixel pairä¸­å³è¾¹çš„åƒç´ å€¼
 for i = 1 : image_size(1)
     for j = 1 : image_size(2)
-        if mod(j, 2) == 1 % ÆæÊıÁĞ£¬pairÖĞµÄ×óÎ»
+        if mod(j, 2) == 1 % å¥‡æ•°åˆ—ï¼Œpairä¸­çš„å·¦ä½
             current_brightness1 = current_brightness1 + image_mat(i, j);
-        else % Å¼ÊıÁĞ£¬pairÖĞµÄÓÒÎ»
+        else % å¶æ•°åˆ—ï¼Œpairä¸­çš„å³ä½
             current_brightness2 = current_brightness2 + image_mat(i, j);
         end
     end
@@ -297,12 +297,12 @@ current_brightness1 = current_brightness1 * 2 / (image_size(1)*image_size(2));
 current_brightness2 = current_brightness2 * 2 / (image_size(1)*image_size(2));
 %     mesh(HistMatrix);
 S_x = zeros(1, 2); S_y = zeros(1, 2);
-if original_brightness1 - current_brightness1 > 0 % ×ó±ßµÄÏñËØÁÁ¶ÈÕûÌå½µµÍÁË£¬Ö´ĞĞDHS°ÑÓÒ±ßµÄÁÁ¶ÈÌá¸ß
+if original_brightness1 - current_brightness1 > 0 % å·¦è¾¹çš„åƒç´ äº®åº¦æ•´ä½“é™ä½äº†ï¼Œæ‰§è¡ŒDHSæŠŠå³è¾¹çš„äº®åº¦æé«˜
     S_x(1) = 1; S_x(2) = 254;
     [ Ps_i, H_Ps1 ] = get_Psi(HistMatrix, S_x);
     [ Pc_i, LM_size1 ] = find_DHS(HistMatrix, Ps_i);
     
-elseif original_brightness1 - current_brightness1 < 0 % ×ó±ßµÄÏñËØÁÁ¶ÈÕûÌåÉÏÉıÁË£¬Ö´ĞĞUHS°ÑÓÒ±ßµÄÁÁ¶È½µµÍ
+elseif original_brightness1 - current_brightness1 < 0 % å·¦è¾¹çš„åƒç´ äº®åº¦æ•´ä½“ä¸Šå‡äº†ï¼Œæ‰§è¡ŒUHSæŠŠå³è¾¹çš„äº®åº¦é™ä½
     S_x(1) = 3; S_x(2) = 256;
     [ Ps_i, H_Ps1 ] = get_Psi(HistMatrix, S_x);
     [ Pc_i, LM_size1 ] = find_UHS(HistMatrix, Ps_i);
@@ -310,21 +310,21 @@ elseif original_brightness1 - current_brightness1 < 0 % ×ó±ßµÄÏñËØÁÁ¶ÈÕûÌåÉÏÉıÁË
 else
     S_x(1) = 1; S_x(2) = 256;
     [ Ps_i, H_Ps1 ] = get_Psi(HistMatrix, S_x);
-    if Ps_i < 3 %%¢Ù DHS
+    if Ps_i < 3 %%â‘  DHS
         [ Pc_i, LM_size1 ] = find_DHS(HistMatrix, Ps_i);
-    elseif Ps_i > 254%% ¢İ UHS
+    elseif Ps_i > 254%% â‘¤ UHS
         [ Pc_i, LM_size1 ] = find_UHS(HistMatrix, Ps_i);          
-    else %% ¢á DHS/UHS
+    else %% â‘¨ DHS/UHS
         [ Pc_i, LM_size1 ] = find_UDHS(HistMatrix, Ps_i);
     end   
 end
 
-if original_brightness2 - current_brightness2 > 0 % ÓÒÎ»ÁÁ¶È½µÏÂÈ¥ÁË£¬RHSÀ´ÌáÉı×óÎ»ÁÁ¶È
+if original_brightness2 - current_brightness2 > 0 % å³ä½äº®åº¦é™ä¸‹å»äº†ï¼ŒRHSæ¥æå‡å·¦ä½äº®åº¦
     S_y(1) = 1; S_y(2) = 254;
     [ Ps_j, H_Ps2 ] = get_Psj(HistMatrix, S_y);
     [ Pc_j, LM_size2 ] = find_RHS(HistMatrix, Ps_j);
     
-elseif original_brightness2 - current_brightness2 < 0 % LHS½µµÍÁÁ¶È
+elseif original_brightness2 - current_brightness2 < 0 % LHSé™ä½äº®åº¦
     S_y(1) = 3; S_y(2) = 256;
     [ Ps_j, H_Ps2 ] = get_Psj(HistMatrix, S_y);
     [ Pc_j, LM_size2 ] = find_LHS(HistMatrix, Ps_j);
@@ -332,13 +332,13 @@ elseif original_brightness2 - current_brightness2 < 0 % LHS½µµÍÁÁ¶È
 else
     S_y(1) = 1; S_y(2) = 256;
     [ Ps_j, H_Ps2 ] = get_Psj(HistMatrix, S_y);
-    if Ps_j < 3 %%¢Ù RHS
+    if Ps_j < 3 %%â‘  RHS
         [ Pc_j, LM_size2 ] = find_DHS(HistMatrix, Ps_j);
         
-    elseif Ps_j > 254%% ¢İ LHS
+    elseif Ps_j > 254%% â‘¤ LHS
         [ Pc_j, LM_size2 ] = find_UHS(HistMatrix, Ps_j);
         
-    else %% ¢á RHS/LHS
+    else %% â‘¨ RHS/LHS
         [ Pc_j, LM_size2 ] = find_RLHS(HistMatrix, Ps_j);
     end
 end
@@ -346,7 +346,7 @@ end
 if H_Ps1 >= H_Ps2
     H_Ps = H_Ps1;
     LM_size = LM_size1;
-    i_j = 0;  %ÓÃi_jÀ´±íÊ¾¸ÃÂÖÊÇĞĞÇ¶Èë»¹ÊÇÁĞÇ¶Èë£¬ÓÃ0±íÊ¾ĞĞ£¬1±íÊ¾ÁĞ
+    i_j = 0;  %ç”¨i_jæ¥è¡¨ç¤ºè¯¥è½®æ˜¯è¡ŒåµŒå…¥è¿˜æ˜¯åˆ—åµŒå…¥ï¼Œç”¨0è¡¨ç¤ºè¡Œï¼Œ1è¡¨ç¤ºåˆ—
 else
     H_Ps = H_Ps2;
     LM_size = LM_size2;
