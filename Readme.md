@@ -2,7 +2,7 @@
 
 1. 在rdh_2DBP.m中修改路径：
 
-   - filepath 输入的图像所在的目录，如"D:\test\"
+   - filepath 输入的图像所在的目录，如"D:\test\"，目录testimages1下有可用的图像作为例子
 
    - savepath 输出图像所在的目录
    - S 迭代次数
@@ -12,12 +12,13 @@
 # How to use
 1. Modify the paths in rdh_2DBP.m:
 
-   - filepath: The directory where the input images are located, e.g., "D:\test"
+   - filepath: The directory where the input images are located, e.g., "D:\test". There are some examples of test images under the directory "testimages1".
    - savepath: The directory where the output images will be saved.
    - S: Number of iterations.
 
 2. Run rdh_2DBP.m.
 
+# Citation
 @ARTICLE{
 9787507,  
 author={Wu, Hao-Tian and Cao, Xin and Jia, Ruoyan and Cheung, Yiu-ming},  
