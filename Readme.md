@@ -17,6 +17,7 @@
    - S: Number of iterations.
 
 2. Run rdh_2DBP.m.
+3. The examples of enhanced results are under the directory "results".
 
 # Citation
 @ARTICLE{
