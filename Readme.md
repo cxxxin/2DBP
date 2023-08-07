@@ -9,6 +9,15 @@
 
 2. 运行rdh_2DBP.m
 
+# How to use
+1. Modify the paths in rdh_2DBP.m:
+
+   - filepath: The directory where the input images are located, e.g., "D:\test"
+   - savepath: The directory where the output images will be saved.
+   - S: Number of iterations.
+
+2. Run rdh_2DBP.m.
+
 @ARTICLE{
 9787507,  
 author={Wu, Hao-Tian and Cao, Xin and Jia, Ruoyan and Cheung, Yiu-ming},  
